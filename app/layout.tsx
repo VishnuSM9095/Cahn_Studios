@@ -21,8 +21,8 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Quote AI",
-  description: "Generate Daily Quotes",
+  title: "Cahn Studios",
+  description: "Everything you need to create high-impact content.",
 };
 
 export default function RootLayout({
