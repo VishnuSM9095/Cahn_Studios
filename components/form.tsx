@@ -40,7 +40,7 @@ export default function ContactForm() {
             Get in Touch
           </h2>
           <p className="mt-3 text-gray-300">
-            We'd love to hear from you! Fill out the form and we'll get back to you soon.
+            We would love to hear from you! Fill out the form and we will get back to you soon.
           </p>
         </div>
 
