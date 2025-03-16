@@ -18,10 +18,12 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",  // ✅ Corrected placement of baseUrl
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@lib/*": ["lib/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "pages/api/scrapper.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "pages/api/scrapper.js", "components/lenis.tsx", "app/services/video-editing"],
   "exclude": ["node_modules"]
 }

@@ -23,6 +23,11 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Cahn Studios",
   description: "Everything you need to create high-impact content.",
+  icons: {
+    icon: "/CAHN_Logo_White_RGB.png", // Standard favicon
+    shortcut: "/CAHN_Logo_White_RGB.png", // For shortcuts
+    apple: "/CAHN_Logo_White_RGB.png", // Apple Touch Icon
+  },
 };
 
 export default function RootLayout({

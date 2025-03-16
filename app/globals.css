@@ -142,3 +142,12 @@
 body{
   font-family: 'PTM55F', sans-serif;
 }
+@layer utilities {
+  .glow-text {
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+  }
+  
+  .glow-button {
+    box-shadow: 0 0 12px rgba(0, 183, 255, 0.8);
+  }
+}
