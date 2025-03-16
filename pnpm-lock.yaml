@@ -107,6 +107,9 @@ importers:
       react:
         specifier: ^18.3.1
         version: 18.3.1
+      react-accordian:
+        specifier: ^1.0.16
+        version: 1.0.16
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
@@ -2941,6 +2944,9 @@ packages:
   raw-body@2.4.1:
     resolution: {integrity: sha512-9WmIKF6mkvA0SLmA2Knm9+qj89e+j1zqgyn8aXGd7+nAduPoqgI9lO57SAZNn/Byzo5P7JhXTyg9PzaJbH73bA==}
     engines: {node: '>= 0.8'}
+
+  react-accordian@1.0.16:
+    resolution: {integrity: sha512-q8Znj9vtMY/RtZvwnLjO7JRFZ6gYkjG2Sw1XFqZQb7p/rnQ2UbsGHY/qigl2S93AYaCBvbbDUH1m5N7nUiaSdQ==}
 
   react-dom@18.3.1:
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
@@ -6480,6 +6486,8 @@ snapshots:
       http-errors: 1.7.3
       iconv-lite: 0.4.24
       unpipe: 1.0.0
+
+  react-accordian@1.0.16: {}
 
   react-dom@18.3.1(react@18.3.1):
     dependencies:
