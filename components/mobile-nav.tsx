@@ -82,11 +82,8 @@ export function MobileNav() {
 
                 {/* Products */}
                 <p className="text-white font-semibold mt-3">Products</p>
-                <MobileLink href="/products/ai-editor" onOpenChange={setOpen}>
-                  AI Video Editor
-                </MobileLink>
-                <MobileLink href="/products/branding-tools" onOpenChange={setOpen}>
-                  Branding Tools
+                <MobileLink href="/products/ai-storytelling-platform" onOpenChange={setOpen}>
+                  AI Storytelling Platform
                 </MobileLink>
               </div>
             </div>

@@ -1,14 +1,23 @@
+'use client'
 import Image from "next/image";
 import { BentoDemo } from "@/components/bento-features";
 import { Spotlight } from "@/components/ui/spotlight-new"; 
 import ContactForm from "@/components/form"; 
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { BorderBeam } from "@/components/magicui/border-beam";
 import ShineBorder from "@/components/magicui/shine-border";
 
 function HeroPage() {
+  // Smooth scrolling function
+  const scrollToSection = (e: React.MouseEvent, sectionId: string) => {
+    e.preventDefault();
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <style>
@@ -17,8 +26,6 @@ function HeroPage() {
             overflow-x: hidden;
             width: 100%;
           }
-
-          /* 🔥 Apply Gradient Transparency to Image */
           .fade-image {
             -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
             mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
@@ -71,15 +78,21 @@ function HeroPage() {
           </p>
 
           <div className="space-x-4 mt-3">
-            <Link href="/features" className={cn(buttonVariants({ size: "lg" }))}>
+            {/* Get Started - Scroll to Services */}
+            <button
+              onClick={(e) => scrollToSection(e, "features")}
+              className={cn(buttonVariants({ size: "lg" }))}
+            >
               Get Started
-            </Link>
-            <a
-              href="/#features"
+            </button>
+
+            {/* Contact Us - Scroll to Contact */}
+            <button
+              onClick={(e) => scrollToSection(e, "contact")}
               className={cn(buttonVariants({ variant: "outline", size: "lg" }), "mt-sm-2")}
             >
-              Let&apos;s Explore 👇🏻
-            </a>
+              Contact Us 👇🏻
+            </button>
           </div>
         </div>
 
@@ -88,12 +101,15 @@ function HeroPage() {
         </div>
       </section>
 
+      {/* Services Section */}
       <section id="features" className="container space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-10">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <h2 className="text-center text-xl font-semibold text-gray-500 pb-2 mt-8 mb-4">SERVICES</h2>
         </div>
         <BentoDemo />
       </section>
+
+      {/* Contact Section */}
       <section id="contact">
         <ContactForm />
       </section>  

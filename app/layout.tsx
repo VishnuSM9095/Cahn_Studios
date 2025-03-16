@@ -24,9 +24,9 @@ export const metadata: Metadata = {
   title: "Cahn Studios",
   description: "Everything you need to create high-impact content.",
   icons: {
-    icon: "/CAHN_Logo_White_RGB.png", // Standard favicon
-    shortcut: "/CAHN_Logo_White_RGB.png", // For shortcuts
-    apple: "/CAHN_Logo_White_RGB.png", // Apple Touch Icon
+    icon: "/chan_white.png", // Standard favicon
+    shortcut: "/chan_white.png", // For shortcuts
+    apple: "/chan_white.png", // Apple Touch Icon
   },
 };
 
