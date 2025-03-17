@@ -63,7 +63,7 @@ function HeroPage() {
             alt="Cahn Studios"
             width={300}
             height={100}
-            className="fade-image dark:hidden mt-10"
+            className="fade-image dark:hidden mt-[150px]"
           />
           <Image
             src="/CAHN_Logo_White_RGB.png"

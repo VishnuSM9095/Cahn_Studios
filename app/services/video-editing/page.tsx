@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Lottie from "react-lottie-player";
 import Link from "next/link";
-import { Raleway } from "next/font/google";
+import { PT_Mono } from "next/font/google";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { MainNav } from "@/components/main-nav";
 import MobileNav from "@/components/mobile-nav";
@@ -11,7 +11,7 @@ import { ModeToggle } from "@/components/toggle";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const raleway = Raleway({ subsets: ["latin"], weight: ["400", "700"] });
+const raleway = PT_Mono({ subsets: ["latin"], weight: ["400", "400"] });
 
 // 🔹 Services & Their Animations
 const servicesData = [
@@ -106,7 +106,7 @@ export default function VideoAutomation() {
                         className="w-full max-w-[300px]"
                         />
                     ) : (
-                        <p className="text-red-500">Animation not found</p>
+                        <p>Loading....</p>
                     )}
 
                     {/* 📝 Service Name & Description */}

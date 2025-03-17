@@ -5,7 +5,7 @@ import Lottie from "react-lottie-player";
 import Link from "next/link";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { MainNav } from "@/components/main-nav";
-import  MobileNav  from "@/components/mobile-nav";
+import MobileNav from "@/components/mobile-nav";
 import { ModeToggle } from "@/components/toggle";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -63,54 +63,52 @@ const Services: React.FC<ServicesProps> = ({ services }) => {
       <BackgroundBeams className="fixed inset-0 -z-20 backdrop-blur-xl" />
 
       {/* 🏗️ Stacked Services Section */}
-      <div className="relative z-10 flex flex-col items-center justify-center mt-[200px]">
+      <div className="relative z-10 flex flex-col items-center justify-center mt-[100px] md:mt-[200px]">
         {services.map((service, index) => {
-          const zIndex = index + 1;
           const isOdd = index % 2 !== 0;
 
           return (
             <section
               key={`service-${index}`}
-              className="sticky top-[50%] transform -translate-y-1/2 flex items-center justify-center min-h-screen "
-              style={{ zIndex }}
+              className={`w-[90vw] max-w-[1200px] mx-auto p-3 md:p-12 rounded-xl shadow-xl border border-white 
+                bg-black/40 backdrop-blur-xl transition-all duration-300 ${
+                  index !== 0 ? "mt-10 md:mt-0" : "" // Adds spacing between cards only on mobile
+                }
+              `}
+              style={{
+                minHeight: "450px",
+                height: "auto",
+                position: "relative",
+                ...(index > 0 && {
+                  transform: `translateY(${index * 60}px)`, // Apply stack effect **only on desktop**
+                }),
+              }}
             >
-              <div
-                className="w-[90vw] max-w-[1200px] mx-auto p-3 md:p-12 rounded-xl shadow-xl border border-white 
-                bg-black/40 backdrop-blur-xl"
-                style={{
-                  minHeight: "450px",
-                  height: "auto",
-                  position: "relative",
-                  transform: `translateY(${index * 60}px)`,
-                }}
-              >
+              <div className="grid items-center gap-6 md:grid-cols-2">
+                {/* 🌀 Lottie Animation */}
+                <div className={`${!isOdd ? "md:order-2" : ""}`}>
+                  {animations[service.animation] && (
+                    <Lottie
+                      loop
+                      animationData={animations[service.animation]}
+                      play
+                      className="w-full max-w-[300px] md:max-w-[400px] mx-auto"
+                    />
+                  )}
+                </div>
 
-                <div className="grid items-center gap-1 md:grid-cols-2">
-                  {/* 🌀 Lottie Animation */}
-                  <div className={`${!isOdd ? "md:order-2" : ""}`}>
-                    {animations[service.animation] && (
-                      <Lottie
-                        loop
-                        animationData={animations[service.animation]}
-                        play
-                        className="w-full max-w-[400px] mx-auto"
-                      />
-                    )}
-                  </div>
-
-                  {/* 📝 Service Content */}
-                  <div className={`text-left ${!isOdd ? "md:order-1" : ""}`}>
-                    <h2 className="text-4xl font-bold text-white">{service.title}</h2>
-                    <p className="mt-4 text-lg text-gray-300">{service.content}</p>
-                    {service.button.enable && (
-                      <Link
-                        href={service.button.link}
-                        className="mt-6 inline-flex items-center text-blue-400 hover:underline text-lg font-semibold"
-                      >
-                        {service.button.label}
-                      </Link>
-                    )}
-                  </div>
+                {/* 📝 Service Content */}
+                <div className={`text-left px-4 ${!isOdd ? "md:order-1" : ""}`}>
+                  <h2 className="text-2xl md:text-4xl font-bold text-white">{service.title}</h2>
+                  <p className="mt-4 text-base md:text-lg text-gray-300">{service.content}</p>
+                  {service.button.enable && (
+                    <Link
+                      href={service.button.link}
+                      className="mt-4 md:mt-6 inline-flex items-center text-blue-400 hover:underline text-lg font-semibold"
+                    >
+                      {service.button.label}
+                    </Link>
+                  )}
                 </div>
               </div>
             </section>
