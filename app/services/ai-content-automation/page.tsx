@@ -27,49 +27,47 @@ const services: Service[] = [
     content:
       "Welcome to AI Content Automation, where we harness the power of artificial intelligence to transform the way you create content. Our service automates the production of high-quality, engaging content, allowing you to achieve exponential reach without investing countless hours in writing, editing, or production.",
     animation: "content-creator-for-digital-marketing.json",
-    button: {
-      enable: true,
-      label: "Check it out",
-      link: "/contact",
-    },
+    button: { enable: true, label: "Check it out", link: "/contact" },
   },
   {
     title: "What is AI Content Automation?",
     content:
       "AI Content Automation uses advanced artificial intelligence to generate tailored content such as blog posts, social media updates, articles, and more. By understanding your brand voice, audience, and goals, our AI creates content that resonates with your target market while saving you time and effort.",
     animation: "VAktuiCt2q.json",
-    button: {
-      enable: true,
-      label: "Check it out",
-      link: "/contact",
-    },
+    button: { enable: true, label: "Check it out", link: "/contact" },
   },
   {
     title: "Why Choose AI Content Automation?",
     content:
       "With AI Content Automation, you can streamline your content creation process and unlock incredible benefits. Save time by eliminating writer’s block and reducing content production from hours to minutes. Our service is cost-effective, providing premium content without the need for a full-time writing team.",
     animation: "content-creator-for-digital-marketing.json",
-    button: {
-      enable: true,
-      label: "Check it out",
-      link: "/contact",
-    },
+    button: { enable: true, label: "Check it out", link: "/contact" },
   },
   {
     title: "Unlock Exponential Reach",
     content:
       "Our AI doesn’t just create content—it optimizes it for maximum visibility. By analyzing trends and user behavior, it crafts content that’s more likely to be shared and discovered, helping you connect with a broader audience effortlessly.",
     animation: "VAktuiCt2q.json",
-    button: {
-      enable: true,
-      label: "Check it out",
-      link: "/contact",
-    },
+    button: { enable: true, label: "Check it out", link: "/contact" },
   },
 ];
 
 const Services: React.FC = () => {
   const [animations, setAnimations] = useState<{ [key: string]: any }>({});
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  // Detect system theme
+  useEffect(() => {
+    const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    setIsDarkMode(darkModeMediaQuery.matches);
+
+    const handleThemeChange = (e: MediaQueryListEvent) => {
+      setIsDarkMode(e.matches);
+    };
+
+    darkModeMediaQuery.addEventListener("change", handleThemeChange);
+    return () => darkModeMediaQuery.removeEventListener("change", handleThemeChange);
+  }, []);
 
   useEffect(() => {
     const loadAnimations = async () => {
@@ -92,7 +90,7 @@ const Services: React.FC = () => {
 
   return (
     <div className="relative min-h-screen">
-      {/* 🔹 Sticky Navbar */}
+      {/* 🔹 Sticky Navbar (No Changes) */}
       <header className="h-16 sticky top-0 z-50 w-full border-b border-border/40 bg-black/80 backdrop-blur">
         <div className="container flex h-16 items-center justify-between px-6 w-full max-w-screen-2xl mx-auto">
           <MobileNav />
@@ -126,8 +124,12 @@ const Services: React.FC = () => {
               style={{ zIndex: services.length + index }}
             >
               <div
-                className="w-[90vw] max-w-[1200px] mx-auto p-6 md:p-12 rounded-xl shadow-xl border border-white 
-                bg-black/40 backdrop-blur-xl transition-all duration-300"
+                className={cn(
+                  "w-[90vw] max-w-[1200px] mx-auto p-6 md:p-12 rounded-xl shadow-xl border transition-all duration-300",
+                  isDarkMode
+                    ? "border-white bg-black/40 backdrop-blur-xl"
+                    : "border-gray-300 bg-white shadow-lg"
+                )}
                 style={{
                   minHeight: "450px",
                   height: "auto",
@@ -152,12 +154,29 @@ const Services: React.FC = () => {
 
                   {/* 📝 Service Content */}
                   <div className={`text-left px-4 ${!isOdd ? "md:order-1" : ""}`}>
-                    <h2 className="text-2xl md:text-4xl font-bold text-white">{service.title}</h2>
-                    <p className="mt-4 text-base md:text-lg text-gray-300">{service.content}</p>
+                    <h2
+                      className={cn(
+                        "text-2xl md:text-4xl font-bold",
+                        isDarkMode ? "text-white" : "text-gray-900"
+                      )}
+                    >
+                      {service.title}
+                    </h2>
+                    <p
+                      className={cn(
+                        "mt-4 text-base md:text-lg",
+                        isDarkMode ? "text-gray-300" : "text-gray-600"
+                      )}
+                    >
+                      {service.content}
+                    </p>
                     {service.button.enable && (
                       <Link
                         href={service.button.link}
-                        className="mt-4 md:mt-6 inline-flex items-center text-blue-400 hover:underline text-lg font-semibold"
+                        className={cn(
+                          "mt-4 md:mt-6 inline-flex items-center text-lg font-semibold",
+                          isDarkMode ? "text-blue-400 hover:underline" : "text-blue-600 hover:text-blue-800"
+                        )}
                       >
                         {service.button.label}
                       </Link>

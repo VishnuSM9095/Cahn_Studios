@@ -1,9 +1,11 @@
-'use client';
+"use client";
 import React, { useState } from "react";
 import { cn } from "@/lib/utils"; // Utility for conditional classes
 import { buttonVariants } from "@/components/ui/button";
+import { useTheme } from "next-themes";
 
 export default function ContactForm() {
+  const { theme } = useTheme();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -13,7 +15,7 @@ export default function ContactForm() {
     setMessage("");
 
     const formData = new FormData(e.currentTarget);
-    formData.append("access_key", "YOUR_ACCESS_KEY_HERE");
+    formData.append("access_key", "179f7d6f-2486-4b5d-aee8-60d9636ad54c");
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
@@ -31,42 +33,93 @@ export default function ContactForm() {
     }
   }
 
+  // Dynamic styles for light and dark modes
+  const isDark = theme === "dark";
+
   return (
-    <section className="container mx-auto py-16 px-6 md:px-12 lg:px-20">
+    <section
+      className={cn(
+        "container mx-auto py-16 px-6 md:px-12 lg:px-20",
+        isDark ? "bg-black text-white" : "bg-gray-100 text-black"
+      )}
+    >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         {/* Left Side - Info Section */}
         <div className="text-left">
-          <h2 className="text-4xl font-bold text-white">
+          <h2
+            className={cn(
+              "text-4xl font-bold",
+              isDark ? "text-white" : "text-black"
+            )}
+          >
             Get in Touch
           </h2>
-          <p className="mt-3 text-gray-300">
-            We would love to hear from you! Fill out the form and we will get back to you soon.
+          <p
+            className={cn(
+              "mt-3",
+              isDark ? "text-gray-300" : "text-gray-600"
+            )}
+          >
+            We would love to hear from you! Fill out the form and we will get
+            back to you soon.
           </p>
         </div>
 
         {/* Right Side - Contact Form Card */}
-        <div className="bg-white/5 backdrop-blur-lg shadow-xl rounded-lg p-6 md:p-8 border border-white/10">
+        <div
+          className={cn(
+            "shadow-xl rounded-lg p-6 md:p-8 border backdrop-blur-lg",
+            isDark
+              ? "bg-white/5 border-white/10"
+              : "bg-white border-gray-300"
+          )}
+        >
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Name Field */}
               <div>
-                <label className="block text-gray-300">Name</label>
+                <label
+                  className={cn(
+                    "block",
+                    isDark ? "text-gray-300" : "text-gray-700"
+                  )}
+                >
+                  Name
+                </label>
                 <input
                   type="text"
                   name="name"
                   placeholder="Your Name"
-                  className="w-full p-3 mt-1 border border-white/20 rounded-md bg-white/10 text-white placeholder-gray-400 focus:ring-2 focus:ring-gray-300 focus:outline-none"
+                  className={cn(
+                    "w-full p-3 mt-1 border rounded-md focus:ring-2 focus:outline-none",
+                    isDark
+                      ? "bg-white/10 text-white placeholder-gray-400 border-white/20 focus:ring-gray-300"
+                      : "bg-white text-black placeholder-gray-500 border-gray-300 focus:ring-gray-600"
+                  )}
                   required
                 />
               </div>
+
               {/* Email Field */}
               <div>
-                <label className="block text-gray-300">Email</label>
+                <label
+                  className={cn(
+                    "block",
+                    isDark ? "text-gray-300" : "text-gray-700"
+                  )}
+                >
+                  Email
+                </label>
                 <input
                   type="email"
                   name="email"
                   placeholder="Your Email"
-                  className="w-full p-3 mt-1 border border-white/20 rounded-md bg-white/10 text-white placeholder-gray-400 focus:ring-2 focus:ring-gray-300 focus:outline-none"
+                  className={cn(
+                    "w-full p-3 mt-1 border rounded-md focus:ring-2 focus:outline-none",
+                    isDark
+                      ? "bg-white/10 text-white placeholder-gray-400 border-white/20 focus:ring-gray-300"
+                      : "bg-white text-black placeholder-gray-500 border-gray-300 focus:ring-gray-600"
+                  )}
                   required
                 />
               </div>
@@ -74,24 +127,48 @@ export default function ContactForm() {
 
             {/* Contact Number */}
             <div>
-              <label className="block text-gray-300">Contact Number</label>
+              <label
+                className={cn(
+                  "block",
+                  isDark ? "text-gray-300" : "text-gray-700"
+                )}
+              >
+                Contact Number
+              </label>
               <input
                 type="tel"
                 name="contact"
                 placeholder="Your Phone Number"
-                className="w-full p-3 mt-1 border border-white/20 rounded-md bg-white/10 text-white placeholder-gray-400 focus:ring-2 focus:ring-gray-300 focus:outline-none"
+                className={cn(
+                  "w-full p-3 mt-1 border rounded-md focus:ring-2 focus:outline-none",
+                  isDark
+                    ? "bg-white/10 text-white placeholder-gray-400 border-white/20 focus:ring-gray-300"
+                    : "bg-white text-black placeholder-gray-500 border-gray-300 focus:ring-gray-600"
+                )}
                 required
               />
             </div>
 
             {/* Message Field */}
             <div>
-              <label className="block text-gray-300">Message</label>
+              <label
+                className={cn(
+                  "block",
+                  isDark ? "text-gray-300" : "text-gray-700"
+                )}
+              >
+                Message
+              </label>
               <textarea
                 name="message"
                 rows={4}
                 placeholder="Write your message..."
-                className="w-full p-3 mt-1 border border-white/20 rounded-md bg-white/10 text-white placeholder-gray-400 focus:ring-2 focus:ring-gray-300 focus:outline-none"
+                className={cn(
+                  "w-full p-3 mt-1 border rounded-md focus:ring-2 focus:outline-none",
+                  isDark
+                    ? "bg-white/10 text-white placeholder-gray-400 border-white/20 focus:ring-gray-300"
+                    : "bg-white text-black placeholder-gray-500 border-gray-300 focus:ring-gray-600"
+                )}
                 required
               ></textarea>
             </div>
@@ -101,7 +178,10 @@ export default function ContactForm() {
               type="submit"
               className={cn(
                 buttonVariants({ size: "lg" }),
-                "w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-200"
+                "w-full transition-all duration-200",
+                isDark
+                  ? "bg-white/10 border border-white/20 text-white hover:bg-white/20"
+                  : "bg-black text-white border border-gray-300 hover:bg-gray-800"
               )}
               disabled={loading}
             >
@@ -110,7 +190,12 @@ export default function ContactForm() {
 
             {/* Message Feedback */}
             {message && (
-              <p className="text-center mt-3 text-sm text-green-400">
+              <p
+                className={cn(
+                  "text-center mt-3 text-sm",
+                  message.includes("Thank you") ? "text-green-400" : "text-red-400"
+                )}
+              >
                 {message}
               </p>
             )}

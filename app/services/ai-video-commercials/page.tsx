@@ -10,6 +10,7 @@ import MobileNav from "@/components/mobile-nav";
 import { ModeToggle } from "@/components/toggle";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
 
 const raleway = PT_Mono({ subsets: ["latin"], weight: ["400", "400"] });
 
@@ -51,6 +52,7 @@ const videoServices = [
 
 const VideoAutomation: React.FC = () => {
   const [animations, setAnimations] = useState<{ [key: string]: any }>({});
+  const { theme } = useTheme(); // Detect theme from navbar
 
   useEffect(() => {
     const loadAnimations = async () => {
@@ -72,7 +74,11 @@ const VideoAutomation: React.FC = () => {
   }, []);
 
   return (
-    <div className={`relative min-h-screen ${raleway.className}`}>
+    <div
+      className={`relative min-h-screen ${
+        theme === "dark" ? "bg-black text-white" : "bg-white text-black"
+      } ${raleway.className}`}
+    >
       {/* 🔹 Sticky Navbar */}
       <header className="h-16 sticky top-0 z-50 w-full border-b border-border/40 bg-black/80 backdrop-blur">
         <div className="container flex h-16 items-center justify-between px-6 w-full max-w-screen-2xl mx-auto">
@@ -82,15 +88,25 @@ const VideoAutomation: React.FC = () => {
           </div>
           <nav className="flex gap-4">
             <ModeToggle />
-            <Link href="/login" className={cn(buttonVariants({ variant: "default", size: "sm" }), "px-4")}>
+            <Link
+              href="/login"
+              className={cn(
+                buttonVariants({ variant: "default", size: "sm" }),
+                "px-4"
+              )}
+            >
               Get Started
             </Link>
           </nav>
         </div>
       </header>
 
-      {/* 🌌 Background Beams */}
-      <BackgroundBeams className="fixed inset-0 -z-20 backdrop-blur-xl" />
+      {/* 🌌 Background Beams that adapt to theme */}
+      <BackgroundBeams
+        className={`fixed inset-0 -z-20 ${
+          theme === "dark" ? "backdrop-blur-xl" : "backdrop-blur-lg"
+        }`}
+      />
 
       {/* 🏗️ Stacked Video Services Section */}
       <div className="relative z-10 flex flex-col items-center justify-center mt-[200px]">
@@ -105,8 +121,11 @@ const VideoAutomation: React.FC = () => {
               style={{ zIndex }}
             >
               <div
-                className="w-[90vw] max-w-[1200px] mx-auto p-3 md:p-12 rounded-xl shadow-xl border border-white 
-                bg-black/40 backdrop-blur-xl"
+                className={`w-[90vw] max-w-[1200px] mx-auto p-3 md:p-12 rounded-xl shadow-xl border transition-all duration-300 ${
+                  theme === "dark"
+                    ? "border-white bg-black/40 backdrop-blur-xl"
+                    : "border-gray-300 bg-white/90 backdrop-blur-lg"
+                }`}
                 style={{
                   minHeight: "450px",
                   height: "auto",
@@ -131,12 +150,28 @@ const VideoAutomation: React.FC = () => {
 
                   {/* 📝 Service Content */}
                   <div className={`text-left ${!isOdd ? "md:order-1" : ""}`}>
-                    <h2 className="text-4xl font-bold text-white">{service.title}</h2>
-                    <p className="mt-4 text-lg text-gray-300">{service.content}</p>
+                    <h2
+                      className={`text-4xl font-bold ${
+                        theme === "dark" ? "text-white" : "text-black"
+                      }`}
+                    >
+                      {service.title}
+                    </h2>
+                    <p
+                      className={`mt-4 text-lg ${
+                        theme === "dark" ? "text-gray-300" : "text-gray-700"
+                      }`}
+                    >
+                      {service.content}
+                    </p>
                     {service.button.enable && (
                       <Link
                         href={service.button.link}
-                        className="mt-6 inline-flex items-center text-blue-400 hover:underline text-lg font-semibold"
+                        className={`mt-6 inline-flex items-center ${
+                          theme === "dark"
+                            ? "text-blue-400 hover:underline"
+                            : "text-blue-600 hover:underline"
+                        } text-lg font-semibold`}
                       >
                         {service.button.label}
                       </Link>
