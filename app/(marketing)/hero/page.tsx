@@ -74,7 +74,7 @@ function HeroPage() {
           />
 
           <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8 mt-5">
-            From AI video ads to automated editing, we craft high-impact content that captivates.
+            Content Creation made effortless
           </p>
 
           <div className="space-x-4 mt-3">

@@ -92,7 +92,7 @@ export function MainNav() {
           {/* Smooth Scroll Links */}
           <NavigationMenuItem>
             <Link
-              href="#features"
+              href="/#features"
               onClick={(e) => scrollToSection(e, "features")}
               className={navigationMenuTriggerStyle()}
             >
@@ -101,7 +101,7 @@ export function MainNav() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <Link
-              href="#contact"
+              href="/#contact"
               onClick={(e) => scrollToSection(e, "contact")}
               className={navigationMenuTriggerStyle()}
             >

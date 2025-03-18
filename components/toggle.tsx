@@ -3,7 +3,6 @@
 import * as React from "react"
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
 import { useTheme } from "next-themes"
-
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -13,7 +12,14 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 export function ModeToggle() {
-  const { setTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
+
+  React.useEffect(() => {
+    // Set default theme to dark on initial load if no theme is set
+    if (!theme) {
+      setTheme("dark")
+    }
+  }, [theme, setTheme])
 
   return (
     <DropdownMenu>
