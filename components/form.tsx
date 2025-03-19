@@ -1,13 +1,18 @@
 "use client";
-import React, { useState } from "react";
-import { cn } from "@/lib/utils"; // Utility for conditional classes
+import React, { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 
 export default function ContactForm() {
-  const { theme } = useTheme();
+  const { theme, resolvedTheme } = useTheme(); // Handling both default and resolved themes
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    setIsDark(resolvedTheme === "dark");
+  }, [resolvedTheme]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -33,19 +38,16 @@ export default function ContactForm() {
     }
   }
 
-  // Dynamic styles for light and dark modes
-  const isDark = theme === "dark";
-
   return (
     <section
       className={cn(
-        "container mx-auto py-16 px-6 md:px-12 lg:px-20",
-        isDark ? "bg-black text-white" : "bg-gray-100 text-black"
+        "container mx-auto py-16 px-6 md:px-12 lg:px-20 transition-colors duration-300",
+        isDark ? "bg-black/10  text-white" : "bg-gray-100 text-black"
       )}
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         {/* Left Side - Info Section */}
-        <div className="text-left">
+        <div>
           <h2
             className={cn(
               "text-4xl font-bold",
@@ -56,22 +58,29 @@ export default function ContactForm() {
           </h2>
           <p
             className={cn(
-              "mt-3",
+              "mt-3 text-lg",
               isDark ? "text-gray-300" : "text-gray-600"
             )}
           >
             We would love to hear from you! Fill out the form and we will get
             back to you soon.
+            <br />
+            Email us at{" "}
+            <strong
+              className={cn(isDark ? "text-gray-200" : "text-gray-700")}
+            >
+              Create@cahnstudios.com
+            </strong>
           </p>
         </div>
 
-        {/* Right Side - Contact Form Card */}
+        {/* Right Side - Contact Form */}
         <div
           className={cn(
-            "shadow-xl rounded-lg p-6 md:p-8 border backdrop-blur-lg",
+            "shadow-xl rounded-lg p-6 md:p-8 border backdrop-blur-lg transition-all",
             isDark
-              ? "bg-white/5 border-white/10"
-              : "bg-white border-gray-300"
+              ? "bg-black/50 border-white/10 text-white"
+              : "bg-white border-gray-200 text-black"
           )}
         >
           <form className="space-y-4" onSubmit={handleSubmit}>
@@ -80,7 +89,7 @@ export default function ContactForm() {
               <div>
                 <label
                   className={cn(
-                    "block",
+                    "block text-sm font-medium",
                     isDark ? "text-gray-300" : "text-gray-700"
                   )}
                 >
@@ -91,9 +100,9 @@ export default function ContactForm() {
                   name="name"
                   placeholder="Your Name"
                   className={cn(
-                    "w-full p-3 mt-1 border rounded-md focus:ring-2 focus:outline-none",
+                    "w-full p-3 mt-1 border rounded-md focus:ring-2 focus:outline-none transition-all",
                     isDark
-                      ? "bg-white/10 text-white placeholder-gray-400 border-white/20 focus:ring-gray-300"
+                      ? "bg-black/30 text-white placeholder-gray-500 border-white/20 focus:ring-gray-300"
                       : "bg-white text-black placeholder-gray-500 border-gray-300 focus:ring-gray-600"
                   )}
                   required
@@ -104,7 +113,7 @@ export default function ContactForm() {
               <div>
                 <label
                   className={cn(
-                    "block",
+                    "block text-sm font-medium",
                     isDark ? "text-gray-300" : "text-gray-700"
                   )}
                 >
@@ -115,9 +124,9 @@ export default function ContactForm() {
                   name="email"
                   placeholder="Your Email"
                   className={cn(
-                    "w-full p-3 mt-1 border rounded-md focus:ring-2 focus:outline-none",
+                    "w-full p-3 mt-1 border rounded-md focus:ring-2 focus:outline-none transition-all",
                     isDark
-                      ? "bg-white/10 text-white placeholder-gray-400 border-white/20 focus:ring-gray-300"
+                      ? "bg-black/30 text-white placeholder-gray-500 border-white/20 focus:ring-gray-300"
                       : "bg-white text-black placeholder-gray-500 border-gray-300 focus:ring-gray-600"
                   )}
                   required
@@ -129,7 +138,7 @@ export default function ContactForm() {
             <div>
               <label
                 className={cn(
-                  "block",
+                  "block text-sm font-medium",
                   isDark ? "text-gray-300" : "text-gray-700"
                 )}
               >
@@ -140,9 +149,9 @@ export default function ContactForm() {
                 name="contact"
                 placeholder="Your Phone Number"
                 className={cn(
-                  "w-full p-3 mt-1 border rounded-md focus:ring-2 focus:outline-none",
+                  "w-full p-3 mt-1 border rounded-md focus:ring-2 focus:outline-none transition-all",
                   isDark
-                    ? "bg-white/10 text-white placeholder-gray-400 border-white/20 focus:ring-gray-300"
+                    ? "bg-black/30 text-white placeholder-gray-500 border-white/20 focus:ring-gray-300"
                     : "bg-white text-black placeholder-gray-500 border-gray-300 focus:ring-gray-600"
                 )}
                 required
@@ -153,7 +162,7 @@ export default function ContactForm() {
             <div>
               <label
                 className={cn(
-                  "block",
+                  "block text-sm font-medium",
                   isDark ? "text-gray-300" : "text-gray-700"
                 )}
               >
@@ -164,9 +173,9 @@ export default function ContactForm() {
                 rows={4}
                 placeholder="Write your message..."
                 className={cn(
-                  "w-full p-3 mt-1 border rounded-md focus:ring-2 focus:outline-none",
+                  "w-full p-3 mt-1 border rounded-md focus:ring-2 focus:outline-none transition-all",
                   isDark
-                    ? "bg-white/10 text-white placeholder-gray-400 border-white/20 focus:ring-gray-300"
+                    ? "bg-black/30 text-white placeholder-gray-500 border-white/20 focus:ring-gray-300"
                     : "bg-white text-black placeholder-gray-500 border-gray-300 focus:ring-gray-600"
                 )}
                 required
@@ -181,7 +190,7 @@ export default function ContactForm() {
                 "w-full transition-all duration-200",
                 isDark
                   ? "bg-white/10 border border-white/20 text-white hover:bg-white/20"
-                  : "bg-black text-white border border-gray-300 hover:bg-gray-800"
+                  : "bg-black/90 text-white border border-gray-300 hover:bg-gray-800"
               )}
               disabled={loading}
             >
@@ -192,7 +201,7 @@ export default function ContactForm() {
             {message && (
               <p
                 className={cn(
-                  "text-center mt-3 text-sm",
+                  "text-center mt-3 text-sm transition-all",
                   message.includes("Thank you") ? "text-green-400" : "text-red-400"
                 )}
               >
