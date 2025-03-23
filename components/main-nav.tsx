@@ -79,8 +79,8 @@ export function MainNav() {
                   <h4 className="text-lg font-semibold text-primary mb-2">Products</h4>
                   <ul className="space-y-2">
                     <li>
-                      <Link href="/products/ai-storytelling-platform" className="block text-muted-foreground transition-colors hover:text-gray-800">
-                        AI Storytelling Platform
+                      <Link href="https://feedo-collabflow.lovable.app/" className="block text-muted-foreground transition-colors hover:text-gray-800">
+                        Feedo
                       </Link>
                     </li>
                   </ul>

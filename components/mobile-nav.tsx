@@ -82,8 +82,8 @@ export function MobileNav() {
 
                 {/* Products */}
                 <p className="text-white font-semibold mt-3">Products</p>
-                <MobileLink href="/products/ai-storytelling-platform" onOpenChange={setOpen}>
-                  AI Storytelling Platform
+                <MobileLink href="https://feedo-collabflow.lovable.app/" onOpenChange={setOpen}>
+                  Feedo
                 </MobileLink>
               </div>
             </div>
